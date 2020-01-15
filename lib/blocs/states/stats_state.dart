@@ -26,6 +26,4 @@ class StatsLoaded extends StatsState {
   String toString() {
     return 'StateLoaded{numActive: $numActive, numCompleted: $numCompleted}';
   }
-
-
 }

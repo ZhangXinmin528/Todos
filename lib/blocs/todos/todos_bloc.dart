@@ -1,11 +1,12 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_todos/bloc/todos/todos_state.dart';
-import 'package:meta/meta.dart';
 import 'package:flutter_todos/models/models.dart';
-import 'package:flutter_todos/bloc/todos/todos.dart';
+import 'package:meta/meta.dart';
 import 'package:todos_repository_simple/todos_repository_simple.dart';
+
+import 'todos.dart';
 
 class TodosBloc extends Bloc<TodosEvent, TodosState> {
   final TodosRepositoryFlutter todoRepository;
@@ -38,14 +39,11 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
   Stream<TodosState> _mapLoadTodosToState() async* {
     try {
       final todos = await this.todoRepository.loadTodos();
-      yield TodosLoaded(
-          todos.map(Todo.fromEntity).toList()
-      );
+      yield TodosLoaded(todos.map(Todo.fromEntity).toList());
     } catch (_) {
       yield TodosNotLoaded();
     }
   }
-
 
   Stream<TodosState> _mapAddTodoToState(AddTodo event) async* {
     if (state is TodosLoaded) {
@@ -76,9 +74,7 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
 
   Stream<TodosState> _mapDeleteTodoState(DeleteTodo event) async* {
     if (state is TodosLoaded) {
-      final updatedTodos = (state as TodosLoaded)
-          .todos
-          .where((todo) {
+      final updatedTodos = (state as TodosLoaded).todos.where((todo) {
         return todo.id != event.todo.id;
       }).toList();
 
@@ -89,14 +85,11 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
 
   Stream<TodosState> _mapToggleAllToState() async* {
     if (state is TodosLoaded) {
-      final allComplete =
-      (state as TodosLoaded).todos.every((todo) {
+      final allComplete = (state as TodosLoaded).todos.every((todo) {
         return todo.complete;
       });
 
-      final List<Todo> updatedTodos = (state as TodosLoaded)
-          .todos
-          .map((todo) {
+      final List<Todo> updatedTodos = (state as TodosLoaded).todos.map((todo) {
         return todo.copyWith(complete: !allComplete);
       }).toList();
 
@@ -108,15 +101,12 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
   Stream<TodosState> _mapClearCompletedToState() async* {
     if (state is TodosLoaded) {
       final List<Todo> updatedTodos =
-      (state as TodosLoaded).todos.where((todo) {
+          (state as TodosLoaded).todos.where((todo) {
         return !todo.complete;
-      })
-          .toList();
+      }).toList();
 
       yield TodosLoaded(updatedTodos);
       _saveTodos(updatedTodos);
     }
   }
-
-
 }

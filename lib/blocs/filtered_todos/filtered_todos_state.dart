@@ -29,6 +29,4 @@ class FilteredTodosLoaded extends FilteredTodosState {
   String toString() {
     return 'FilteredTodosLoaded{filteredTodos: $filteredTodos, activeFilter: $activeFilter}';
   }
-
-
 }

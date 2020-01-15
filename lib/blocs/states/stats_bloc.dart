@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_todos/bloc/todos/todos.dart';
-import 'package:flutter_todos/bloc/todos/todos_state.dart';
+import 'package:flutter_todos/blocs/todos/todos.dart';
 import 'package:meta/meta.dart';
 
-import 'stats_event.dart';
-import 'stats_state.dart';
+import 'stats.dart';
 
 class StatBloc extends Bloc<StatsEvent, StatsState> {
   final TodosBloc todosBloc;
