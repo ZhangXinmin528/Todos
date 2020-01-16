@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/blocs/blocs.dart';
 import 'package:flutter_todos/localization.dart';
 import 'package:flutter_todos/models/app_tab.dart';
 import 'package:todos_app_core/todos_app_core.dart';
+import 'package:flutter_todos/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -25,8 +25,7 @@ class HomeScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           key: ArchSampleKeys.addTodoFab,
           onPressed: () {
-            Navigator.pushNamed(context, ArchSampleRoutes.addTodo)
-            ,
+            Navigator.pushNamed(context, ArchSampleRoutes.addTodo);
           },
           child: Icon(Icons.add),
           tooltip: ArchSampleLocalizations
