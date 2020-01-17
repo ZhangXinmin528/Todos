@@ -13,7 +13,7 @@ class Stats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return BlocBuilder<StatBloc, StatsState>(builder: (context, state) {
+    return BlocBuilder<StatsBloc, StatsState>(builder: (context, state) {
       if (state is StatsLoading) {
         return LoadingIndicator(key: FlutterTodosKeys.statsLoadingIndicator,);
       } else if (state is StatsLoaded) {

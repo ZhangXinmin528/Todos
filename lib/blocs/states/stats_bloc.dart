@@ -6,11 +6,11 @@ import 'package:meta/meta.dart';
 
 import 'stats.dart';
 
-class StatBloc extends Bloc<StatsEvent, StatsState> {
+class StatsBloc extends Bloc<StatsEvent, StatsState> {
   final TodosBloc todosBloc;
   StreamSubscription todosSubscription;
 
-  StatBloc({@required this.todosBloc}) {
+  StatsBloc({@required this.todosBloc}) {
     todosSubscription = todosBloc.listen((state) {
       if (state is TodosLoaded) {
         add(UpdateStates(state.todos));
